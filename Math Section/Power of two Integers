@@ -1,0 +1,11 @@
+public class Solution {
+    public int isPower(double a) {
+    
+   double p=0;
+   for(double i=1; i<=Math.sqrt(a);i++){
+       p=Math.log(a)/Math.log(i);
+       if(Math.pow(i,p)==a) return 1;
+   }
+  	return 0;
+      }
+  	}
