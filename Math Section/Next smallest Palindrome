@@ -1,0 +1,62 @@
+public class Solution {
+    public String solve(String A) {
+        int n = A.length();
+        int lastChanged = -1;
+        int originalChanged = -1;
+        char[] str = A.toCharArray();
+
+        for (int i = 0; i < str.length / 2; ++i) {
+            char x = str[i];
+            char y = str[str.length - 1 - i];
+            if (x != y) {
+                str[str.length - 1 - i] = x;
+                lastChanged = str.length - 1 - i;
+                originalChanged = y;
+            }
+        }
+
+        String ans = "";
+            if (lastChanged == -1 || (originalChanged - '0') > (str[lastChanged] - '0')) {
+                int mid = str.length / 2;
+                int i, j;
+                if (str.length % 2 == 0) {
+                    j = mid;
+                    i = mid - 1;
+                } else {
+                    i = mid;
+                    j = mid;
+                }
+
+                boolean changed = false;
+                while (i >= 0 && j < str.length) {
+                    if (str[i] != '9') {
+                        // System.out.println(str);
+                        char p = (char)(str[i] + 1);
+                        str[i] = p;
+                        str[j] = str[i];
+                        // System.out.println(str);
+                        changed = true;
+                        break;
+                    } else {
+                        str[i] = '0';
+                        str[j] = '0';
+                    }
+                    --i;
+                    ++j;
+                }
+
+                if (!changed) {
+                    int numOfZero = str.length - 1;
+                    str[0] = '1';
+                    ans = String.valueOf(str) + "1";
+                    return ans;
+                }
+
+            }
+            ans = String.valueOf(str);
+            return ans;
+            
+        }
+
+    
+}
